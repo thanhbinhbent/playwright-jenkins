@@ -5,6 +5,8 @@ This guide will help you integrate Playwright with Jenkins to automate your end-
 ## Prerequisites
 
 - **Jenkins** installed and configured.
+- Run Jenkins
+  $JAVA_HOME/bin/java -Dmail.smtp.starttls.enable=true -jar /opt/homebrew/opt/jenkins-lts/libexec/jenkins.war --httpListenAddress=127.0.0.1 --httpPort=8080
 
 - **Node.js** and **npm** installed.
 

@@ -1,8 +1,10 @@
 {
-  "name": "playwright_with_jenkins",
+  "name": "playwright-jenkins",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "testCase": "npx playwright test"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
