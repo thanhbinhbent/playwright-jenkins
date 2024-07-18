@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/thanhbinhbent/playwright-jenkins.git'
-            }
-        }
         stage('Run tests in Docker') {
             agent {
                 docker {
