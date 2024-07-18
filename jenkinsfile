@@ -1,11 +1,24 @@
 pipeline {
-   agent { docker { image 'mcr.microsoft.com/playwright:v1.45.1-jammy' } }
-   stages {
-      stage('e2e-tests') {
-         steps {
-            sh 'npm ci'
-            sh 'npx playwright test'
-         }
-      }
-   }
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/thanhbinhbent/playwright-jenkins.git'
+            }
+        }
+        stage('Run tests in Docker') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/playwright:v1.45.1-jammy'
+                    args '-u root' // Chạy container với quyền root (nếu cần thiết)
+                    reuseNode true // Tùy chọn để tái sử dụng node Docker
+                }
+            }
+            steps {
+                sh 'npm ci'
+                sh 'npx playwright test'
+            }
+        }
+    }
 }
