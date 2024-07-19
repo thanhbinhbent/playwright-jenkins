@@ -3,16 +3,13 @@ pipeline {
 
     stages {
         stage('Run tests in Docker') {
-            agent {
-                docker {
-                    image 'mcr.microsoft.com/playwright:v1.45.1-jammy'
-                    args '-u root' // Chạy container với quyền root (nếu cần thiết)
-                    reuseNode true // Tùy chọn để tái sử dụng node Docker
-                }
-            }
             steps {
-                sh 'npm ci'
-                sh 'npx playwright test'
+                script {
+                    docker.image('mcr.microsoft.com/playwright:v1.45.1-jammy').inside('-u root') {
+                        sh 'npm ci'
+                        sh 'npx playwright test'
+                    }
+                }
             }
         }
     }
